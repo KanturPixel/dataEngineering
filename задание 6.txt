@@ -1,0 +1,32 @@
+2)
+SELECT COUNT(from_users_id) AS 'COUNT',
+from_users_id
+FROM vk.messages
+where to_users_id = 6
+GROUP BY from_users_id;
+
+3)
+SELECT * 
+FROM media 
+WHERE users_id IN 
+(SELECT * FROM vk.profiles ORDER BY bitrhday DESC LIMIT 10)
+
+4)
+SELECT COUNT(likes.users_id)
+FROM likes,
+profiles WHERE likes.users_id = profiles.users_id and profiles.gender='m' ;
+
+SELECT COUNT(likes.users_id)
+FROM likes,
+profiles WHERE likes.users_id = profiles.users_id and profiles.gender='f' ;
+
+5)
+SELECT *,
+(SELECT count(*) FROM messages where messages.from_users_id=users.id)+ 
+(SELECT count(*) FROM posts where posts.users_id=users.id)+
+(SELECT count(*) FROM likes where likes.users_id=users.id)+
+(SELECT count(*) FROM media where media.users_id=users.id) AS summ
+
+FROM users
+ORDER BY summ DESC
+
