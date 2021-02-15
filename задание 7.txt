@@ -1,0 +1,14 @@
+1)
+
+SELECT users.name
+FROM users 
+INNER JOIN orders ON (orders.user_id = users.id)
+GROUP BY users.name
+HAVING COUNT(orders.id) > 0
+
+2)
+
+SELECT products.name, catalogs.name
+FROM products 
+INNER JOIN catalogs  ON (products.catalog_id = catalog.id)
+GROUP BY products.id
